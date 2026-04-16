@@ -6,9 +6,10 @@ type GameCardProps = {
   event: SeasonEvent;
   index: number;
   eventCount: number;
+  uconnLogoUrl?: string;
 };
 
-export default function GameCard({ event, index, eventCount }: GameCardProps) {
+export default function GameCard({ event, index, eventCount, uconnLogoUrl }: GameCardProps) {
   const isLeft = index % 2 === 0;
 
   const staggerDelay = index * 0.08;
@@ -21,18 +22,41 @@ export default function GameCard({ event, index, eventCount }: GameCardProps) {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.55, ease: "easeOut", delay: staggerDelay }}
     >
-      <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5">
-        <p className="text-sm text-sky-300">{event.date}</p>
-        <h4 className="mt-2 text-xl font-bold">{event.title}</h4>
-        <p className="mt-3 text-slate-300">{event.description}</p>
-        <div className="mt-4 inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-sm font-medium text-emerald-200">
+      <div className="rounded-2xl bg-slate-900/70 p-5">
+        <p className="text-sm uppercase tracking-[0.25em] text-sky-300">{event.round}</p>
+        <p className="mt-2 text-sm text-slate-400">{event.date}</p>
+        <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xl font-bold tracking-tight text-white md:text-2xl">
+          <span className="inline-flex items-center gap-2">
+            {uconnLogoUrl ? (
+              <img
+                src={uconnLogoUrl}
+                alt=""
+                className="h-8 w-8 shrink-0 object-contain"
+              />
+            ) : null}
+            <span>UConn</span>
+          </span>
+          <span className="font-semibold text-slate-500">vs</span>
+          <span className="inline-flex items-center gap-2">
+            <span>{event.opponent}</span>
+            {event.opponentLogoUrl ? (
+              <img
+                src={event.opponentLogoUrl}
+                alt=""
+                className="h-8 w-8 shrink-0 object-contain"
+              />
+            ) : null}
+          </span>
+        </div>
+        <div className="mt-4 inline-flex rounded-full bg-emerald-400/10 px-3 py-1 text-sm font-medium text-emerald-200">
           {event.stat}
         </div>
+        <p className="mt-4 text-slate-300">{event.description}</p>
       </div>
 
-      <div className="mt-4 rounded-2xl border border-dashed border-white/15 bg-slate-900/50 p-5">
+      <div className="mt-4 rounded-2xl bg-slate-900/50 p-5">
         <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Highlight slot</p>
-        <div className="mt-4 flex h-40 items-center justify-center rounded-2xl border border-white/10 bg-black/30 text-sm text-slate-400">
+        <div className="mt-4 flex h-40 items-center justify-center rounded-2xl bg-black/30 text-sm text-slate-400">
           {event.clip}
         </div>
       </div>
