@@ -16,3 +16,7 @@ npm-debug.log*
 *.tsbuildinfo
 
 .cursor/
+
+# Local project content
+/public/videos/
+/TODO.md
