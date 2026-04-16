@@ -20,35 +20,32 @@ export default function HomeClient({ seasons }: HomeClientProps) {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-      <section className="relative overflow-hidden border-b border-white/10">
+      <section className="relative overflow-hidden">
         {current.heroVideo ? (
-          <>
-            <video
-              key={current.id}
-              className="absolute inset-0 h-full w-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-            >
-              <source src={current.heroVideo} type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/55 to-slate-950/95" />
-          </>
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/55 to-slate-950/95" />
-        )}
+          <video
+            key={current.id}
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src={current.heroVideo} type="video/mp4" />
+          </video>
+        ) : null}
 
-        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/70 to-slate-950" />
+
+        <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
           <div className="max-w-3xl">
             <p className="mb-3 text-sm uppercase tracking-[0.35em] text-sky-300">
-              UConn Men’s Basketball Timeline
+              UConn Men&apos;s Basketball Timeline
             </p>
             <h1 className="text-4xl font-black tracking-tight md:text-6xl">
               Rings. Runs. Moments.
             </h1>
             <p className="mt-5 max-w-2xl text-base text-slate-200 md:text-lg">
-              Explore the Huskies’ most recent championship success through season-by-season
+              Explore the Huskies&apos; most recent championship success through season-by-season
               timelines, major tournament moments, media, and analytics.
             </p>
 
