@@ -76,7 +76,7 @@ function SeasonOverviewCard({ current }: SeasonOverviewProps) {
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {current.analytics.map((item) => (
-          <div key={item.label} className="rounded-2xl border border-white/10 bg-slate-900/70 p-4">
+          <div key={item.label} className="p-4">
             <p className="text-sm text-slate-400">{item.label}</p>
             <p className="mt-2 text-2xl font-bold">{item.value}</p>
           </div>
