@@ -1,0 +1,78 @@
+"use client";
+import type { SeasonEvent } from "../data/seasons";
+import { motion } from "framer-motion";
+
+type GameCardProps = {
+  event: SeasonEvent;
+  index: number;
+  eventCount: number;
+};
+
+export default function GameCard({ event, index, eventCount }: GameCardProps) {
+  const isLeft = index % 2 === 0;
+
+  const staggerDelay = index * 0.08;
+
+  const content = (
+    <motion.div
+      className="w-full max-w-xl"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.55, ease: "easeOut", delay: staggerDelay }}
+    >
+      <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5">
+        <p className="text-sm text-sky-300">{event.date}</p>
+        <h4 className="mt-2 text-xl font-bold">{event.title}</h4>
+        <p className="mt-3 text-slate-300">{event.description}</p>
+        <div className="mt-4 inline-flex rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-sm font-medium text-emerald-200">
+          {event.stat}
+        </div>
+      </div>
+
+      <div className="mt-4 rounded-2xl border border-dashed border-white/15 bg-slate-900/50 p-5">
+        <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Highlight slot</p>
+        <div className="mt-4 flex h-40 items-center justify-center rounded-2xl border border-white/10 bg-black/30 text-sm text-slate-400">
+          {event.clip}
+        </div>
+      </div>
+    </motion.div>
+  );
+
+  return (
+    <div className="flex flex-col gap-6 md:grid md:grid-cols-[minmax(0,1fr)_3.5rem_minmax(0,1fr)] md:items-stretch md:gap-x-6 md:gap-y-0">
+      <div
+        className={
+          isLeft
+            ? "order-2 flex flex-col md:order-1 md:items-end md:pr-2"
+            : "order-2 hidden min-h-0 md:order-1 md:block"
+        }
+        aria-hidden={!isLeft}
+      >
+        {isLeft ? content : null}
+      </div>
+
+      <div className="order-1 flex shrink-0 justify-center md:order-2">
+        <div className="flex w-14 flex-col items-center">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-sky-400/40 bg-sky-400/15 font-bold text-sky-200">
+            {index + 1}
+          </div>
+          {index !== eventCount - 1 && (
+            <div className="mt-2 w-px flex-1 min-h-[4rem] bg-gradient-to-b from-sky-400/50 to-transparent" />
+          )}
+        </div>
+      </div>
+
+      <div
+        className={
+          !isLeft
+            ? "order-2 flex flex-col md:order-3 md:items-start md:pl-2"
+            : "hidden min-h-0 md:order-3 md:block"
+        }
+        aria-hidden={isLeft}
+      >
+        {!isLeft ? content : null}
+      </div>
+    </div>
+  );
+}
