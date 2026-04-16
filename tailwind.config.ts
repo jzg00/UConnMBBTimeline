@@ -6,11 +6,7 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        dynasty: ['"Dancing Script"', 'cursive'],
-      },
-    },
+    extend: {},
   },
   plugins: [],
 } satisfies Config;
