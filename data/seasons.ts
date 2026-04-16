@@ -31,7 +31,7 @@ export const seasons: Season[] = [
     record: "31-8",
     summary:
       "A dominant March run that culminated in UConn's fifth national title, marking a return to the top and ushering in the Dan Hurley era.",
-    heroVideo: getHeroVideoUrl("uconn2023hero.mp4", "/videos/uconn2023.mp4"),
+    heroVideo: getHeroVideoUrl("uconn2023hero.mp4"),
     uconnLogo: "/logos/uconn.png",
     analytics: [
       { label: "Overall Record", value: "31-8" },
@@ -107,7 +107,7 @@ export const seasons: Season[] = [
     record: "37-3",
     summary:
       "A powerhouse season that ended with UConn repeating as national champions and capturing its sixth title, highlighted by the program's first-ever No. 1 overall seed in the NCAA Tournament.",
-    heroVideo: getHeroVideoUrl("uconn2024hero.mp4", "/videos/uconn2024.mp4"),
+    heroVideo: getHeroVideoUrl("uconn2024hero.mp4"),
     uconnLogo: "/logos/uconn.png",
     analytics: [
       { label: "Overall Record", value: "37-3" },
