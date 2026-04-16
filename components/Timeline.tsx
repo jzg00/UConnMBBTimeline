@@ -10,7 +10,7 @@ export default function Timeline({ events, uconnLogo }: TimelineProps) {
   const eventCount = events.length;
 
   return (
-    <section className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8">
+    <section className="mt-10">
       <div className="text-center">
         <p className="text-sm uppercase tracking-[0.25em] text-sky-300">Tournament timeline</p>
       </div>

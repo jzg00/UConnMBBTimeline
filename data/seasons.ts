@@ -47,7 +47,7 @@ export const seasons: Season[] = [
         stat: "Won 87-63",
         description:
           "UConn survives early pressure, then takes over in the second half to begin the tournament run.",
-        clip: "Add YouTube or NCAA highlight embed here",
+        clip: "Add game highlights here",
       },
       {
         round: "Round of 32",
@@ -57,7 +57,7 @@ export const seasons: Season[] = [
         stat: "Won 70-55",
         description:
           "A sharp two-way performance sends UConn comfortably into the Sweet 16.",
-        clip: "Add game highlights",
+        clip: "Add game highlights here",
       },
       {
         round: "Sweet 16",
@@ -67,7 +67,7 @@ export const seasons: Season[] = [
         stat: "Won 88-65",
         description:
           "The Huskies handle a dangerous Arkansas team and keep building momentum.",
-        clip: "Add game highlights",
+        clip: "Add game highlights here",
       },
       {
         round: "Elite Eight",
@@ -77,7 +77,7 @@ export const seasons: Season[] = [
         stat: "Won 82-54",
         description:
           "One of the most convincing wins of the run puts UConn in the Final Four.",
-        clip: "Add game highlights",
+        clip: "Add game highlights here",
       },
       {
         round: "Final Four",
@@ -87,7 +87,7 @@ export const seasons: Season[] = [
         stat: "Won 72-59",
         description:
           "UConn controls the game and punches its ticket to the national championship.",
-        clip: "Add game highlights",
+        clip: "Add game highlights here",
       },
       {
         round: "National Championship",
@@ -97,7 +97,7 @@ export const seasons: Season[] = [
         stat: "Won 76-59",
         description:
           "The Huskies finish the job and claim another national title.",
-        clip: "Add title game highlights",
+        clip: "Add game highlights here",
       },
     ],
   },
@@ -123,7 +123,7 @@ export const seasons: Season[] = [
         stat: "Won 91-52",
         description:
           "UConn opens the tournament with a comfortable first-round win.",
-        clip: "Add game highlights",
+        clip: "Add game highlights here",
       },
       {
         round: "Round of 32",
@@ -133,7 +133,7 @@ export const seasons: Season[] = [
         stat: "Won 75-58",
         description:
           "The Huskies stay on track and move into the second weekend.",
-        clip: "Add game highlights",
+        clip: "Add game highlights here",
       },
       {
         round: "Sweet 16",
@@ -143,7 +143,7 @@ export const seasons: Season[] = [
         stat: "Won 82-52",
         description:
           "A rematch of the previous title game ends the same way: UConn in control.",
-        clip: "Add game highlights",
+        clip: "Add game highlights here",
       },
       {
         round: "Elite Eight",
@@ -153,7 +153,7 @@ export const seasons: Season[] = [
         stat: "Won 77-52",
         description:
           "A 30-0 run sends UConn back to the Final Four.",
-        clip: "Add game highlights",
+        clip: "Add game highlights here",
       },
       {
         round: "Final Four",
@@ -163,7 +163,7 @@ export const seasons: Season[] = [
         stat: "Won 86-72",
         description:
           "The offense catches fire and UConn reaches another championship game.",
-        clip: "Add game highlights",
+        clip: "Add game highlights here",
       },
       {
         round: "National Championship",
@@ -173,7 +173,7 @@ export const seasons: Season[] = [
         stat: "Won 75-60",
         description:
           "UConn completes the repeat and cements its modern dynasty status.",
-        clip: "Add title game highlights",
+        clip: "Add game highlights here",
       },
     ],
   },

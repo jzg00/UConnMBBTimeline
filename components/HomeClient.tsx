@@ -34,19 +34,19 @@ export default function HomeClient({ seasons }: HomeClientProps) {
           </video>
         ) : null}
 
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/70 to-slate-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/50 to-slate-950" />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
+        <div className="relative mx-auto max-w-7xl px-6 py-32 md:px-10 md:py-44">
           <div className="max-w-3xl">
             <p className="mb-3 text-sm uppercase tracking-[0.35em] text-sky-300">
-              UConn Men&apos;s Basketball Timeline
+              UConn Men&apos;s Basketball
             </p>
-            <h1 className="text-4xl font-black tracking-tight md:text-6xl">
-              Rings. Runs. Moments.
+            <h1 className="font-dynasty text-4xl font-black italic tracking-tight md:text-6xl">
+              Rings. Runs. <span className="text-sky-300">Dynasty.</span>
             </h1>
             <p className="mt-5 max-w-2xl text-base text-slate-200 md:text-lg">
-              Explore the Huskies&apos; most recent championship success through season-by-season
-              timelines, major tournament moments, media, and analytics.
+              Explore the Huskies&apos; most recent championship runs through season-by-season
+              timelines, major tournament moments, and analytics.
             </p>
 
             <SeasonSelector
