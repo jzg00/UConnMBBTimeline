@@ -3,9 +3,10 @@ import GameCard from "./GameCard";
 
 type TimelineProps = {
   events: SeasonEvent[];
+  uconnLogo?: string;
 };
 
-export default function Timeline({ events }: TimelineProps) {
+export default function Timeline({ events, uconnLogo }: TimelineProps) {
   const eventCount = events.length;
 
   return (
@@ -20,7 +21,13 @@ export default function Timeline({ events }: TimelineProps) {
 
       <div className="mt-8 space-y-6">
         {events.map((event, index) => (
-          <GameCard key={event.title} event={event} index={index} eventCount={eventCount} />
+          <GameCard
+            key={`${event.date}-${event.round}-${index}`}
+            event={event}
+            index={index}
+            eventCount={eventCount}
+            uconnLogo={uconnLogo}
+          />
         ))}
       </div>
     </section>

@@ -6,10 +6,10 @@ type GameCardProps = {
   event: SeasonEvent;
   index: number;
   eventCount: number;
-  uconnLogoUrl?: string;
+  uconnLogo?: string;
 };
 
-export default function GameCard({ event, index, eventCount, uconnLogoUrl }: GameCardProps) {
+export default function GameCard({ event, index, eventCount, uconnLogo }: GameCardProps) {
   const isLeft = index % 2 === 0;
 
   const staggerDelay = index * 0.08;
@@ -27,9 +27,9 @@ export default function GameCard({ event, index, eventCount, uconnLogoUrl }: Gam
         <p className="mt-2 text-sm text-slate-400">{event.date}</p>
         <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xl font-bold tracking-tight text-white md:text-2xl">
           <span className="inline-flex items-center gap-2">
-            {uconnLogoUrl ? (
+            {uconnLogo ? (
               <img
-                src={uconnLogoUrl}
+                src={uconnLogo}
                 alt=""
                 className="h-8 w-8 shrink-0 object-contain"
               />
@@ -39,9 +39,9 @@ export default function GameCard({ event, index, eventCount, uconnLogoUrl }: Gam
           <span className="font-semibold text-slate-500">vs</span>
           <span className="inline-flex items-center gap-2">
             <span>{event.opponent}</span>
-            {event.opponentLogoUrl ? (
+            {event.opponentLogo ? (
               <img
-                src={event.opponentLogoUrl}
+                src={event.opponentLogo}
                 alt=""
                 className="h-8 w-8 shrink-0 object-contain"
               />

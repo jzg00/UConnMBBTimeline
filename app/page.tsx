@@ -37,7 +37,7 @@ export default function Home() {
 
       <main className="mx-auto max-w-7xl px-6 py-10 md:px-10 md:py-14">
         <SeasonOverview current={current} />
-        <Timeline events={current.events} />
+        <Timeline events={current.events} uconnLogo={current.uconnLogo} />
         <StatsPanel />
       </main>
     </div>
