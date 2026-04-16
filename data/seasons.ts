@@ -27,10 +27,10 @@ export type Season = {
 export const seasons: Season[] = [
   {
     id: "2022-2023",
-    title: "2022-23 National Championship Run",
+    title: "2022-23 The Return",
     record: "31-8",
     summary:
-      "A dominant March run capped by UConn winning the 2023 national title.",
+      "A dominant March run that culminated in UConn's fifth national title, marking a return to the top and ushering in the Dan Hurley era.",
     heroImage:
       "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1400&q=80",
     coachImage:
@@ -48,6 +48,7 @@ export const seasons: Season[] = [
         round: "Round of 64",
         date: "March 17, 2023",
         opponent: "Iona",
+        opponentLogo: "/logos/iona.png",
         stat: "Won 87-63",
         description:
           "UConn survives early pressure, then takes over in the second half to begin the tournament run.",
@@ -57,6 +58,7 @@ export const seasons: Season[] = [
         round: "Round of 32",
         date: "March 19, 2023",
         opponent: "Saint Mary's",
+        opponentLogo: "/logos/saint-marys.png",
         stat: "Won 70-55",
         description:
           "A sharp two-way performance sends UConn comfortably into the Sweet 16.",
@@ -66,6 +68,7 @@ export const seasons: Season[] = [
         round: "Sweet 16",
         date: "March 23, 2023",
         opponent: "Arkansas",
+        opponentLogo: "/logos/arkansas.png",
         stat: "Won 88-65",
         description:
           "The Huskies handle a dangerous Arkansas team and keep building momentum.",
@@ -75,6 +78,7 @@ export const seasons: Season[] = [
         round: "Elite Eight",
         date: "March 25, 2023",
         opponent: "Gonzaga",
+        opponentLogo: "/logos/gonzaga.png",
         stat: "Won 82-54",
         description:
           "One of the most convincing wins of the run puts UConn in the Final Four.",
@@ -84,6 +88,7 @@ export const seasons: Season[] = [
         round: "Final Four",
         date: "April 1, 2023",
         opponent: "Miami",
+        opponentLogo: "/logos/miami.png",
         stat: "Won 72-59",
         description:
           "UConn controls the game and punches its ticket to the national championship.",
@@ -106,7 +111,7 @@ export const seasons: Season[] = [
     title: "2023-24 Back to Back",
     record: "37-3",
     summary:
-      "A powerhouse season that ended with UConn repeating as national champions. For the first time in program history, the Huskies were the No. 1 overall seed in the NCAA Tournament.",
+      "A powerhouse season that ended with UConn repeating as national champions and capturing its sixth title, highlighted by the program's first-ever No. 1 overall seed in the NCAA Tournament.",
     heroImage:
       "https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=1400&q=80",
     coachImage:
