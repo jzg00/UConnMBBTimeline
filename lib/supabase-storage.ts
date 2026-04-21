@@ -1,8 +1,11 @@
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "");
-const heroVideosBucket = process.env.NEXT_PUBLIC_SUPABASE_HERO_VIDEOS_BUCKET;
 
-export function getHeroVideoUrl(objectPath: string) {
-  if (!supabaseUrl || !heroVideosBucket) return undefined;
-  const normalizedObjectPath = objectPath.replace(/^\/+/, "");
-  return `${supabaseUrl}/storage/v1/object/public/${heroVideosBucket}/${normalizedObjectPath}`;
+/** Build a public URL for an object in a Supabase Storage public bucket. */
+export function getPublicStorageUrl(
+  bucket: string | null | undefined,
+  objectPath: string | null | undefined
+): string | undefined {
+  if (!supabaseUrl || !bucket || !objectPath) return undefined;
+  const normalized = objectPath.replace(/^\/+/, "");
+  return `${supabaseUrl}/storage/v1/object/public/${bucket}/${normalized}`;
 }

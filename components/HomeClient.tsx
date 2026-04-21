@@ -12,10 +12,26 @@ type HomeClientProps = {
 };
 
 export default function HomeClient({ seasons }: HomeClientProps) {
-  const [currentIndex, setCurrentIndex] = useState(() => {
-    const i = seasons.findIndex((s) => s.id === "2022-2023");
-    return i >= 0 ? i : 0;
-  });
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  if (seasons.length === 0) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-950 px-6 text-center text-slate-200">
+        <div className="max-w-lg">
+          <p className="text-sm uppercase tracking-[0.35em] text-sky-300">
+            UConn Men&apos;s Basketball
+          </p>
+          <h1 className="mt-4 text-3xl font-bold">No seasons loaded yet</h1>
+          <p className="mt-3 text-slate-400">
+            <code className="rounded bg-white/10 px-1 py-0.5">public.seasons</code> returned
+            no rows. Run <code className="rounded bg-white/10 px-1 py-0.5">supabase/seed.sql</code>{" "}
+            (or add rows manually via the Supabase Table Editor) to see the timeline.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const current = seasons[currentIndex] ?? seasons[0];
 
   return (

@@ -1,180 +1,180 @@
-import { getHeroVideoUrl } from "@/lib/supabase-storage";
+import { getPublicStorageUrl } from "@/lib/supabase-storage";
 
-/** Per-game row. Set `opponentLogo` to a path under `public/` (e.g. `/logos/stetson.png`). */
+/** Single game row rendered in the Timeline. */
 export type SeasonEvent = {
   round: string;
   date: string;
   opponent: string;
-  /** Optional logo file path (under `public/`) shown next to the opponent name. */
   opponentLogo?: string;
   stat: string;
   description: string;
   clip: string;
 };
 
+/** A season as the UI consumes it. Shape is intentionally decoupled from the DB. */
 export type Season = {
   id: string;
   title: string;
   record: string;
   summary: string;
   heroVideo?: string;
-  /** Optional UConn logo path under `public/` (e.g. `/logos/uconn.png`) on every game card. */
   uconnLogo?: string;
   analytics: { label: string; value: string }[];
   events: SeasonEvent[];
 };
 
-export const seasons: Season[] = [
-  {
-    id: "2022-2023",
-    title: "2022-23 The Return",
-    record: "31-8",
-    summary:
-      "A dominant March run that culminated in UConn's fifth national title, marking a return to the top and ushering in the Dan Hurley era.",
-    heroVideo: getHeroVideoUrl("uconn2023hero.mp4"),
-    uconnLogo: "/logos/uconn.png",
-    analytics: [
-      { label: "Overall Record", value: "31-8" },
-      { label: "Tournament Record", value: "6-0" },
-      { label: "Seed", value: "4" },
-    ],
-    events: [
-      {
-        round: "Round of 64",
-        date: "March 17, 2023",
-        opponent: "Iona",
-        opponentLogo: "/logos/iona.png",
-        stat: "Won 87-63",
-        description:
-          "UConn survives early pressure, then takes over in the second half to begin the tournament run.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "Round of 32",
-        date: "March 19, 2023",
-        opponent: "Saint Mary's",
-        opponentLogo: "/logos/saint-marys.png",
-        stat: "Won 70-55",
-        description:
-          "A sharp two-way performance sends UConn comfortably into the Sweet 16.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "Sweet 16",
-        date: "March 23, 2023",
-        opponent: "Arkansas",
-        opponentLogo: "/logos/arkansas.png",
-        stat: "Won 88-65",
-        description:
-          "The Huskies handle a dangerous Arkansas team and keep building momentum.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "Elite Eight",
-        date: "March 25, 2023",
-        opponent: "Gonzaga",
-        opponentLogo: "/logos/gonzaga.png",
-        stat: "Won 82-54",
-        description:
-          "One of the most convincing wins of the run puts UConn in the Final Four.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "Final Four",
-        date: "April 1, 2023",
-        opponent: "Miami",
-        opponentLogo: "/logos/miami.png",
-        stat: "Won 72-59",
-        description:
-          "UConn controls the game and punches its ticket to the national championship.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "National Championship",
-        date: "April 3, 2023",
-        opponent: "San Diego State",
-        opponentLogo: "/logos/sdsu.png",
-        stat: "Won 76-59",
-        description:
-          "The Huskies finish the job and claim another national title.",
-        clip: "Add game highlights here",
-      },
-    ],
-  },
-  {
-    id: "2023-2024",
-    title: "2023-24 Back to Back",
-    record: "37-3",
-    summary:
-      "A powerhouse season that ended with UConn repeating as national champions and capturing its sixth title, highlighted by the program's first-ever No. 1 overall seed in the NCAA Tournament.",
-    heroVideo: getHeroVideoUrl("uconn2024hero.mp4"),
-    uconnLogo: "/logos/uconn.png",
-    analytics: [
-      { label: "Overall Record", value: "37-3" },
-      { label: "Tournament Record", value: "6-0" },
-      { label: "Seed", value: "1" },
-    ],
-    events: [
-      {
-        round: "Round of 64",
-        date: "March 22, 2024",
-        opponent: "Stetson",
-        opponentLogo: "/logos/stetson.png",
-        stat: "Won 91-52",
-        description:
-          "UConn opens the tournament with a comfortable first-round win.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "Round of 32",
-        date: "March 24, 2024",
-        opponent: "Northwestern",
-        opponentLogo: "/logos/northwestern.png",
-        stat: "Won 75-58",
-        description:
-          "The Huskies stay on track and move into the second weekend.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "Sweet 16",
-        date: "March 28, 2024",
-        opponent: "San Diego State",
-        opponentLogo: "/logos/sdsu.png",
-        stat: "Won 82-52",
-        description:
-          "A rematch of the previous title game ends the same way: UConn in control.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "Elite Eight",
-        date: "March 30, 2024",
-        opponent: "Illinois",
-        opponentLogo: "/logos/illinois.png",
-        stat: "Won 77-52",
-        description:
-          "A 30-0 run sends UConn back to the Final Four.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "Final Four",
-        date: "April 6, 2024",
-        opponent: "Alabama",
-        opponentLogo: "/logos/alabama.png",
-        stat: "Won 86-72",
-        description:
-          "The offense catches fire and UConn reaches another championship game.",
-        clip: "Add game highlights here",
-      },
-      {
-        round: "National Championship",
-        date: "April 8, 2024",
-        opponent: "Purdue",
-        opponentLogo: "/logos/purdue.png",
-        stat: "Won 75-60",
-        description:
-          "UConn completes the repeat and cements its modern dynasty status.",
-        clip: "Add game highlights here",
-      },
-    ],
-  },
-];
+// ---------------------------------------------------------------------------
+// DB row types. These mirror the columns in public.seasons and
+// public.tournament_games. Nullable columns (BBR stats that may not be
+// populated yet) are typed as `| null`.
+// ---------------------------------------------------------------------------
+
+export type SeasonRow = {
+  id: string;
+  title: string;
+  summary: string | null;
+  sort_order: number;
+
+  hero_video_bucket: string | null;
+  hero_video_path: string | null;
+  uconn_logo_path: string | null;
+
+  head_coach: string | null;
+
+  games: number | null;
+  wins: number | null;
+  losses: number | null;
+  conference: string | null;
+  conf_wins: number | null;
+  conf_losses: number | null;
+  ap_preseason_rank: number | null;
+  ap_final_rank: number | null;
+
+  srs: number | null;
+  sos: number | null;
+  pace: number | null;
+  off_rtg: number | null;
+  def_rtg: number | null;
+
+  pts_per_game: number | null;
+  opp_pts_per_game: number | null;
+
+  ncaa_seed: number | null;
+  postseason_result: string | null;
+};
+
+export type TournamentGameRow = {
+  id: number;
+  season_id: string;
+  round_order: number;
+  round: string;
+  game_date: string;
+  opponent: string;
+  opponent_logo_path: string | null;
+  uconn_score: number | null;
+  opponent_score: number | null;
+  description: string | null;
+  highlight_clip_url: string | null;
+};
+
+// ---------------------------------------------------------------------------
+// DB row → UI mappers.
+// ---------------------------------------------------------------------------
+
+const DATE_FMT = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+
+function formatGameDate(iso: string): string {
+  const d = new Date(`${iso}T00:00:00Z`);
+  return Number.isNaN(d.getTime()) ? iso : DATE_FMT.format(d);
+}
+
+function formatStatLine(row: TournamentGameRow): string {
+  if (row.uconn_score == null || row.opponent_score == null) return "";
+  const uconnWon = row.uconn_score > row.opponent_score;
+  const verb = uconnWon ? "Won" : "Lost";
+  const [high, low] = [
+    Math.max(row.uconn_score, row.opponent_score),
+    Math.min(row.uconn_score, row.opponent_score),
+  ];
+  return `${verb} ${high}-${low}`;
+}
+
+function mapTournamentGameRow(row: TournamentGameRow): SeasonEvent {
+  return {
+    round: row.round,
+    date: formatGameDate(row.game_date),
+    opponent: row.opponent,
+    opponentLogo: row.opponent_logo_path ?? undefined,
+    stat: formatStatLine(row),
+    description: row.description ?? "",
+    clip: row.highlight_clip_url ?? "Add game highlights here",
+  };
+}
+
+/**
+ * Build the analytics panel rows shown on the season overview card. Which
+ * stats we surface here is intentionally a small curated set; the full BBR
+ * column set lives on the `SeasonRow` and is available for a richer dashboard
+ * later.
+ */
+function buildAnalytics(row: SeasonRow, events: SeasonEvent[]): Season["analytics"] {
+  const out: Season["analytics"] = [];
+
+  if (row.wins != null && row.losses != null) {
+    out.push({ label: "Overall Record", value: `${row.wins}-${row.losses}` });
+  }
+
+  if (events.length > 0) {
+    const tourneyWins = events.filter((e) => /^Won/.test(e.stat)).length;
+    out.push({
+      label: "Tournament Record",
+      value: `${tourneyWins}-${events.length - tourneyWins}`,
+    });
+  }
+
+  if (row.ncaa_seed != null) {
+    out.push({ label: "Seed", value: String(row.ncaa_seed) });
+  }
+
+  return out;
+}
+
+function mapSeasonRow(row: SeasonRow, games: TournamentGameRow[]): Season {
+  const events = games
+    .slice()
+    .sort((a, b) => a.round_order - b.round_order)
+    .map(mapTournamentGameRow);
+
+  const record =
+    row.wins != null && row.losses != null ? `${row.wins}-${row.losses}` : "";
+
+  return {
+    id: row.id,
+    title: row.title,
+    record,
+    summary: row.summary ?? "",
+    heroVideo: getPublicStorageUrl(row.hero_video_bucket, row.hero_video_path),
+    uconnLogo: row.uconn_logo_path ?? "/logos/uconn.png",
+    analytics: buildAnalytics(row, events),
+    events,
+  };
+}
+
+/** Join season rows with their tournament games. */
+export function buildSeasons(
+  seasonRows: SeasonRow[],
+  gameRows: TournamentGameRow[]
+): Season[] {
+  const bySeason = new Map<string, TournamentGameRow[]>();
+  for (const g of gameRows) {
+    const list = bySeason.get(g.season_id) ?? [];
+    list.push(g);
+    bySeason.set(g.season_id, list);
+  }
+  return seasonRows.map((s) => mapSeasonRow(s, bySeason.get(s.id) ?? []));
+}
