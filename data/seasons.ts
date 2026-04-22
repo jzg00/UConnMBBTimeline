@@ -77,6 +77,70 @@ export type TournamentGameRow = {
   highlight_clip_url: string | null;
 };
 
+/**
+ * Mirrors public.team_game_logs. One row per UConn game for a season; every
+ * column maps 1:1 to a BBR "Team Game Log (Basic)" column after tiny renames
+ * (3P -> three_p, etc). See supabase/migrations/20260421000100_team_game_logs.sql
+ * and docs/bbr-ingest.md.
+ */
+export type TeamGameLogRow = {
+  season_id: string;
+  rk: number | null;
+  game_num: number;
+  game_date: string;
+  venue: "@" | "N" | null;
+  opponent: string;
+  game_type: string | null;
+  result: "W" | "L" | null;
+  team_pts: number | null;
+  opp_pts: number | null;
+  ot: string | null;
+
+  fg: number | null;
+  fga: number | null;
+  fg_pct: number | null;
+  three_p: number | null;
+  three_pa: number | null;
+  three_pct: number | null;
+  two_p: number | null;
+  two_pa: number | null;
+  two_pct: number | null;
+  efg_pct: number | null;
+  ft: number | null;
+  fta: number | null;
+  ft_pct: number | null;
+  orb: number | null;
+  drb: number | null;
+  trb: number | null;
+  ast: number | null;
+  stl: number | null;
+  blk: number | null;
+  tov: number | null;
+  pf: number | null;
+
+  opp_fg: number | null;
+  opp_fga: number | null;
+  opp_fg_pct: number | null;
+  opp_three_p: number | null;
+  opp_three_pa: number | null;
+  opp_three_pct: number | null;
+  opp_two_p: number | null;
+  opp_two_pa: number | null;
+  opp_two_pct: number | null;
+  opp_efg_pct: number | null;
+  opp_ft: number | null;
+  opp_fta: number | null;
+  opp_ft_pct: number | null;
+  opp_orb: number | null;
+  opp_drb: number | null;
+  opp_trb: number | null;
+  opp_ast: number | null;
+  opp_stl: number | null;
+  opp_blk: number | null;
+  opp_tov: number | null;
+  opp_pf: number | null;
+};
+
 // ---------------------------------------------------------------------------
 // DB row → UI mappers.
 // ---------------------------------------------------------------------------
