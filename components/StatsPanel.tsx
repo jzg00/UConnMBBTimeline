@@ -7,6 +7,8 @@ import type { Season, TeamGameLogRow } from "@/data/seasons";
 type StatsPanelProps = {
   current: Season;
   games: TeamGameLogRow[];
+  seasons: Season[];
+  onSelectSeasonId: (id: string) => void;
 };
 
 // ---------------------------------------------------------------------------
@@ -444,6 +446,52 @@ function ShootingRow({
   );
 }
 
+/**
+ * Subtle inline season switcher — a native <select> with its default chrome
+ * stripped and a small chevron appended, so it reads like a quiet piece of
+ * metadata next to the "Stats & Analytics" eyebrow. Uses the native picker
+ * on mobile. Hides itself when there's only one season loaded.
+ */
+function SeasonSelect({
+  seasons,
+  currentId,
+  onSelectSeasonId,
+}: {
+  seasons: Season[];
+  currentId: string;
+  onSelectSeasonId: (id: string) => void;
+}) {
+  if (seasons.length <= 1) return null;
+  return (
+    <label className="group relative inline-flex cursor-pointer items-center gap-1 text-xs text-slate-400 hover:text-slate-200">
+      <select
+        value={currentId}
+        onChange={(e) => onSelectSeasonId(e.target.value)}
+        aria-label="Select season"
+        className="cursor-pointer appearance-none bg-transparent pr-4 font-mono text-xs tracking-wide focus:outline-none"
+      >
+        {seasons.map((s) => (
+          <option key={s.id} value={s.id} className="bg-slate-900 text-white">
+            {s.id}
+          </option>
+        ))}
+      </select>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        className="pointer-events-none absolute right-0 h-3 w-3 opacity-60 transition group-hover:opacity-100"
+      >
+        <path
+          fillRule="evenodd"
+          d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06Z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </label>
+  );
+}
+
 function TabButton({
   scope,
   count,
@@ -530,7 +578,12 @@ function GameRow({ game }: { game: TeamGameLogRow }) {
 // Entry point
 // ---------------------------------------------------------------------------
 
-export default function StatsPanel({ current, games }: StatsPanelProps) {
+export default function StatsPanel({
+  current,
+  games,
+  seasons,
+  onSelectSeasonId,
+}: StatsPanelProps) {
   const [scopeId, setScopeId] = useState<ScopeId>("all");
 
   const ref = useRef<HTMLDivElement>(null);
@@ -562,11 +615,18 @@ export default function StatsPanel({ current, games }: StatsPanelProps) {
     return (
       <section id="analytics" className="mt-10 scroll-mt-24">
         <div className="rounded-3xl border border-white/10 bg-white/5 p-8 text-center">
-          <p className="text-sm uppercase tracking-[0.25em] text-sky-300">
-            Stats & Analytics
-          </p>
+          <div className="flex items-center justify-center gap-3">
+            <p className="text-sm uppercase tracking-[0.25em] text-sky-300">
+              Stats & Analytics
+            </p>
+            <SeasonSelect
+              seasons={seasons}
+              currentId={current.id}
+              onSelectSeasonId={onSelectSeasonId}
+            />
+          </div>
           <p className="mt-3 text-lg text-slate-400">
-            Coming soon for the {current.title.split(" ")[0]} season.
+            Coming soon for the {current.id} season.
           </p>
         </div>
       </section>
@@ -590,11 +650,18 @@ export default function StatsPanel({ current, games }: StatsPanelProps) {
             width also stays constant. */}
         <div className="flex items-baseline justify-between gap-3 border-b border-white/10 pb-4 sm:pb-5">
           <div className="min-w-0 flex-1">
-            <p className="text-xs uppercase tracking-[0.25em] text-sky-300 sm:text-sm">
-              Stats & Analytics
-            </p>
+            <div className="flex items-center gap-3">
+              <p className="text-xs uppercase tracking-[0.25em] text-sky-300 sm:text-sm">
+                Stats & Analytics
+              </p>
+              <SeasonSelect
+                seasons={seasons}
+                currentId={current.id}
+                onSelectSeasonId={onSelectSeasonId}
+              />
+            </div>
             <p className="mt-1 truncate text-xs text-slate-500">
-              Season {current.id} &middot; {activeScope.description}
+              {activeScope.description}
             </p>
           </div>
           <div className="shrink-0 text-right">
@@ -607,14 +674,14 @@ export default function StatsPanel({ current, games }: StatsPanelProps) {
           </div>
         </div>
 
-        {/* Tabs.
+        {/* Scope tabs.
             The four full labels don't fit on one row at mobile width, so on
             mobile we lay them out as a 2x2 grid (no container chrome). On sm+
             they all fit inline and we wrap them in the usual pill container. */}
         <div
           role="tablist"
           aria-label="Filter games by competition"
-          className="mt-4 grid grid-cols-2 gap-1.5 sm:mt-5 sm:flex sm:flex-wrap sm:items-center sm:gap-2 sm:rounded-full sm:border sm:border-white/10 sm:bg-white/[0.03] sm:p-1"
+          className="mt-3 grid grid-cols-2 gap-1.5 sm:mt-4 sm:flex sm:flex-wrap sm:items-center sm:gap-2 sm:rounded-full sm:border sm:border-white/10 sm:bg-white/[0.03] sm:p-1"
         >
           {SCOPES.map((scope) => (
             <TabButton

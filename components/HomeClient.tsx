@@ -21,6 +21,11 @@ export default function HomeClient({ seasons, gamesBySeason }: HomeClientProps) 
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const handleSelectSeasonId = (id: string) => {
+    const idx = seasons.findIndex((s) => s.id === id);
+    if (idx >= 0) setCurrentIndex(idx);
+  };
+
   if (seasons.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-950 px-6 text-center text-slate-200">
@@ -75,10 +80,7 @@ export default function HomeClient({ seasons, gamesBySeason }: HomeClientProps) 
             <SeasonSelector
               seasons={seasons}
               current={current}
-              onSelectSeasonId={(id) => {
-                const idx = seasons.findIndex((s) => s.id === id);
-                if (idx >= 0) setCurrentIndex(idx);
-              }}
+              onSelectSeasonId={handleSelectSeasonId}
             />
 
             <button
@@ -107,7 +109,12 @@ export default function HomeClient({ seasons, gamesBySeason }: HomeClientProps) 
       <main className="mx-auto max-w-7xl px-6 py-10 md:px-10 md:py-14">
         <SeasonOverview current={current} />
         <Timeline events={current.events} uconnLogo={current.uconnLogo} />
-        <StatsPanel current={current} games={gamesBySeason[current.id] ?? []} />
+        <StatsPanel
+          current={current}
+          games={gamesBySeason[current.id] ?? []}
+          seasons={seasons}
+          onSelectSeasonId={handleSelectSeasonId}
+        />
       </main>
     </div>
   );
