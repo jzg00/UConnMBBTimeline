@@ -1,6 +1,7 @@
 "use client";
 import type { SeasonEvent } from "../data/seasons";
 import { motion } from "framer-motion";
+import { parseYouTubeId, youTubeEmbedUrl } from "@/lib/youtube";
 
 type GameCardProps = {
   event: SeasonEvent;
@@ -8,6 +9,42 @@ type GameCardProps = {
   eventCount: number;
   uconnLogo?: string;
 };
+
+/**
+ * Inline YouTube highlight embed. Uses the privacy-friendly youtube-nocookie
+ * domain and `loading="lazy"` so browsers only request the iframe when the
+ * card scrolls near the viewport. If the stored URL isn't a recognizable
+ * YouTube link we fall back to the original placeholder state.
+ */
+function HighlightEmbed({ clip, opponent }: { clip: string; opponent: string }) {
+  const videoId = parseYouTubeId(clip);
+
+  if (!videoId) {
+    return (
+      <div className="mt-4 rounded-2xl bg-slate-900/50 p-5">
+        <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Highlight</p>
+        <div className="mt-4 flex h-40 items-center justify-center rounded-2xl bg-black/30 text-sm text-slate-400">
+          {clip}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-4 overflow-hidden rounded-2xl bg-black">
+      <div className="aspect-video w-full">
+        <iframe
+          src={youTubeEmbedUrl(videoId)}
+          title={`UConn vs ${opponent} highlights`}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="h-full w-full border-0"
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function GameCard({ event, index, eventCount, uconnLogo }: GameCardProps) {
   const isLeft = index % 2 === 0;
@@ -54,12 +91,7 @@ export default function GameCard({ event, index, eventCount, uconnLogo }: GameCa
         <p className="mt-4 text-slate-300">{event.description}</p>
       </div>
 
-      <div className="mt-4 rounded-2xl bg-slate-900/50 p-5">
-        <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Highlight slot</p>
-        <div className="mt-4 flex h-40 items-center justify-center rounded-2xl bg-black/30 text-sm text-slate-400">
-          {event.clip}
-        </div>
-      </div>
+      <HighlightEmbed clip={event.clip} opponent={event.opponent} />
     </motion.div>
   );
 
