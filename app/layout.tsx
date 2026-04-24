@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: "UConn Men’s Basketball Timeline",
   description:
     "Explore the Huskies’ championship runs through season timelines, moments, and analytics.",
+  icons: {
+    icon: "/logos/uconn-favicon.png",
+    shortcut: "/logos/uconn-favicon.png",
+    apple: "/logos/uconn-favicon.png",
+  },
 };
 
 export default function RootLayout({
