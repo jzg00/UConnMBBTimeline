@@ -45,6 +45,8 @@ export default function HomeClient({ seasons, gamesBySeason }: HomeClientProps) 
   }
 
   const current = seasons[currentIndex] ?? seasons[0];
+  const isEmptySeason =
+    current.events.length === 0 && (gamesBySeason[current.id] ?? []).length === 0;
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -83,38 +85,52 @@ export default function HomeClient({ seasons, gamesBySeason }: HomeClientProps) 
               onSelectSeasonId={handleSelectSeasonId}
             />
 
-            <button
-              type="button"
-              onClick={scrollToAnalytics}
-              className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-sky-300 underline decoration-sky-300/40 decoration-1 underline-offset-4 transition hover:text-white hover:decoration-white/70"
-            >
-              See analytics
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5"
+            {!isEmptySeason && (
+              <button
+                type="button"
+                onClick={scrollToAnalytics}
+                className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-sky-300 underline decoration-sky-300/40 decoration-1 underline-offset-4 transition hover:text-white hover:decoration-white/70"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10 3a.75.75 0 0 1 .75.75v10.69l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06l3.72 3.72V3.75A.75.75 0 0 1 10 3Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
+                See analytics
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 3a.75.75 0 0 1 .75.75v10.69l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06l3.72 3.72V3.75A.75.75 0 0 1 10 3Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       </section>
 
       <main className="mx-auto max-w-7xl px-6 py-10 md:px-10 md:py-14">
-        <SeasonOverview current={current} />
-        <Timeline events={current.events} uconnLogo={current.uconnLogo} />
-        <StatsPanel
-          current={current}
-          games={gamesBySeason[current.id] ?? []}
-          seasons={seasons}
-          onSelectSeasonId={handleSelectSeasonId}
-        />
+        {isEmptySeason ? (
+          <section className="flex flex-col items-center gap-3 pt-4 text-center">
+            <h2 className="text-4xl font-medium tracking-tight text-white md:text-5xl">
+              {current.id}
+            </h2>
+            <p className="text-base text-slate-400 md:text-lg">coming soon...</p>
+          </section>
+        ) : (
+          <>
+            <SeasonOverview current={current} />
+            <Timeline events={current.events} uconnLogo={current.uconnLogo} />
+            <StatsPanel
+              key={current.id}
+              current={current}
+              games={gamesBySeason[current.id] ?? []}
+              seasons={seasons}
+              onSelectSeasonId={handleSelectSeasonId}
+            />
+          </>
+        )}
       </main>
     </div>
   );

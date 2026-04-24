@@ -38,6 +38,16 @@ insert into public.seasons (
   'Dan Hurley',
   40, 37, 3,
   1, 'National Champion'
+),
+(
+  '2025-26',
+  '2025-26 Season',
+  'Coming soon.',
+  30,
+  null, null, '/logos/uconn.png',
+  null,
+  null, null, null,
+  null, null
 )
 on conflict (id) do update set
   title             = excluded.title,
