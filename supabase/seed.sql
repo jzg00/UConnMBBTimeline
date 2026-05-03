@@ -24,7 +24,7 @@ insert into public.seasons (
   '2022-23 The Return',
   'A dominant March run that culminated in UConn''s fifth national title, marking a return to the top and ushering in the Dan Hurley era.',
   10,
-  'hero-videos', 'uconn2023hero.mp4', '/logos/uconn.png',
+  null, null, '/logos/uconn.png',  -- hero: lib/hero-video.ts HERO_VIDEOS + NEXT_PUBLIC_MEDIA_BASE_URL
   'Dan Hurley',
   39, 31, 8,
   4, 'National Champion'
@@ -34,7 +34,7 @@ insert into public.seasons (
   '2023-24 Back to Back',
   'A powerhouse season that ended with UConn repeating as national champions and capturing its sixth title, highlighted by the program''s first-ever No. 1 overall seed in the NCAA Tournament.',
   20,
-  'hero-videos', 'uconn2024hero.mp4', '/logos/uconn.png',
+  null, null, '/logos/uconn.png',  -- hero: HERO_VIDEOS + NEXT_PUBLIC_MEDIA_BASE_URL
   'Dan Hurley',
   40, 37, 3,
   1, 'National Champion'

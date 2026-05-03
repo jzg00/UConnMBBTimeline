@@ -3,9 +3,9 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "UConn Men’s Basketball Timeline",
+  title: "UConn Men’s Basketball — Timeline and Analytics",
   description:
-    "Explore the Huskies’ championship runs through season timelines, moments, and analytics.",
+    "Explore the Huskies’ championship runs through season timelines, tournament highlights, and analytics.",
   icons: {
     icon: "/logos/uconn-favicon.png",
     shortcut: "/logos/uconn-favicon.png",

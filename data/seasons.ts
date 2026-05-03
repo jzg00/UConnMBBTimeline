@@ -1,4 +1,4 @@
-import { getPublicStorageUrl } from "@/lib/supabase-storage";
+import { resolveHeroVideoUrl } from "@/lib/hero-video";
 
 /** Single game row rendered in the Timeline. */
 export type SeasonEvent = {
@@ -222,7 +222,7 @@ function mapSeasonRow(row: SeasonRow, games: TournamentGameRow[]): Season {
     title: row.title,
     record,
     summary: row.summary ?? "",
-    heroVideo: getPublicStorageUrl(row.hero_video_bucket, row.hero_video_path),
+    heroVideo: resolveHeroVideoUrl(row.id),
     uconnLogo: row.uconn_logo_path ?? "/logos/uconn.png",
     analytics: buildAnalytics(row, events),
     events,

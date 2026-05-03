@@ -59,6 +59,7 @@ export default function HomeClient({ seasons, gamesBySeason }: HomeClientProps) 
             muted
             loop
             playsInline
+            preload="metadata"
           >
             <source src={current.heroVideo} type="video/mp4" />
           </video>

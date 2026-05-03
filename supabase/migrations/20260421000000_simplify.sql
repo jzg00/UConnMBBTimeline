@@ -28,8 +28,8 @@ create table if not exists public.seasons (
   summary               text,
   sort_order            integer not null default 0,
 
-  hero_video_bucket     text,                                      -- Supabase Storage bucket
-  hero_video_path       text,                                      -- object path within the bucket
+  hero_video_bucket     text,                                      -- nullable; heroes served from R2 in app (lib/hero-video.ts)
+  hero_video_path       text,
   uconn_logo_path       text default '/logos/uconn.png',
 
   head_coach            text,
